@@ -730,6 +730,16 @@
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after { animation: none !important; transition: none !important; }
     }
+    /* Предотвращаем перенос слов в важных местах */
+    .hero-ornament,
+    .hero-date,
+    .section-eyebrow,
+    .prog-time,
+    .prog-title {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
   </style>
 </head>
 <body>

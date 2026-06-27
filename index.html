@@ -1,0 +1,1359 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Айгель & Ян — 11 июля 2026</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Lato:wght@300;400&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:       #0D1B3E;
+      --sapphire:   #1A3A6B;
+      --mid-blue:   #2C5F9E;
+      --periwinkle: #C5D4F0;
+      --cream:      #F7F8FC;
+      --gold:       #C9A84C;
+      --light-gold: #E8D5A3;
+      --graphite:   #1C2340;
+      --silver:     #8A9BBD;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--cream);
+      color: var(--graphite);
+      font-family: 'Lato', sans-serif;
+      font-weight: 300;
+      overflow-x: hidden;
+    }
+
+    /* ── STAR / FIREFLY CANVAS ── */
+    #bg-canvas {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ── PETALS CANVAS ── */
+    #petals-canvas {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    /* ── WEDDING RINGS CANVAS ── */
+    #rings-canvas {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      pointer-events: none;
+      z-index: 5;
+    }
+
+    /* ═══════════════════════════
+       HERO
+    ═══════════════════════════ */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 2rem;
+      background: linear-gradient(165deg, #060e22 0%, #0D1B3E 40%, #1A3A6B 80%, #1e4a82 100%);
+      overflow: hidden;
+      z-index: 1;
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at 25% 25%, rgba(201,168,76,0.13) 0%, transparent 55%),
+        radial-gradient(ellipse at 75% 75%, rgba(44,95,158,0.35) 0%, transparent 55%);
+      pointer-events: none;
+    }
+
+    /* Animated ring behind names */
+    .hero-ring {
+      position: absolute;
+      width: min(70vw, 500px);
+      height: min(70vw, 500px);
+      border-radius: 50%;
+      border: 1px solid rgba(201,168,76,0.15);
+      animation: ringPulse 4s ease-in-out infinite;
+    }
+    .hero-ring:nth-child(2) {
+      width: min(55vw, 400px);
+      height: min(55vw, 400px);
+      border-color: rgba(201,168,76,0.1);
+      animation-delay: -2s;
+    }
+
+    @keyframes ringPulse {
+      0%, 100% { transform: scale(1);   opacity: 0.6; }
+      50%       { transform: scale(1.04); opacity: 1; }
+    }
+
+    .hero-ornament {
+      position: relative; z-index: 2;
+      font-size: clamp(1rem, 2.8vw, 1.35rem);
+      color: var(--gold);
+      letter-spacing: 0.45em;
+      margin-bottom: 1.6rem;
+      text-transform: uppercase;
+      animation: fadeDown 1.2s ease both, ornamentPulse 2.8s ease-in-out infinite 1.5s;
+      text-shadow: 0 0 18px rgba(201,168,76,0.5);
+    }
+
+    @keyframes ornamentPulse {
+      0%, 100% { opacity: 0.75; text-shadow: 0 0 14px rgba(201,168,76,0.4); letter-spacing: 0.45em; }
+      50%       { opacity: 1;    text-shadow: 0 0 30px rgba(201,168,76,0.85), 0 0 8px rgba(201,168,76,0.5); letter-spacing: 0.5em; }
+    }
+
+    .hero-names {
+      position: relative; z-index: 2;
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-size: clamp(3.8rem, 13vw, 8.5rem);
+      line-height: 0.95;
+      color: var(--cream);
+      letter-spacing: -0.01em;
+      animation: fadeDown 1.4s ease both;
+    }
+
+    .hero-names em {
+      font-style: italic;
+      color: var(--light-gold);
+    }
+
+    .hero-ampersand {
+      display: block;
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: clamp(2rem, 6vw, 4rem);
+      color: var(--gold);
+      margin: -0.15em 0;
+      animation: fadeDown 1.55s ease both;
+    }
+
+    .hero-divider {
+      position: relative; z-index: 2;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin: 1.8rem auto;
+      animation: fadeDown 1.8s ease both;
+    }
+    .hero-divider::before,
+    .hero-divider::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      width: 60px;
+      background: linear-gradient(to right, transparent, var(--gold));
+    }
+    .hero-divider::after {
+      background: linear-gradient(to left, transparent, var(--gold));
+    }
+    .hero-divider span {
+      color: var(--gold);
+      font-size: 1rem;
+    }
+
+    .hero-date {
+      position: relative; z-index: 2;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.25rem, 3.5vw, 2rem);
+      color: var(--periwinkle);
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      animation: fadeDown 1.9s ease both;
+    }
+
+    .hero-subtitle {
+      position: relative; z-index: 2;
+      margin-top: 1.2rem;
+      font-size: clamp(1.45rem, 3.8vw, 2.1rem); /* Увеличен размер */
+      color: rgba(197,212,240,0.9);
+      letter-spacing: 0.06em;
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      animation: fadeDown 2.1s ease both;
+      line-height: 1.35;
+    }
+
+    .scroll-hint {
+      position: absolute;
+      bottom: 2.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      color: rgba(197,212,240,0.4);
+      font-size: 0.7rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      z-index: 2;
+      animation: bounceY 2.2s ease-in-out infinite 3s;
+    }
+
+    /* ═══════════════════════════
+       COUNTDOWN
+    ═══════════════════════════ */
+    .countdown-section {
+      position: relative; z-index: 1;
+      padding: 6rem 2rem;
+      text-align: center;
+      background: var(--cream);
+    }
+
+    .section-eyebrow {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 0.9rem;
+      letter-spacing: 0.35em;
+      color: var(--gold);
+      text-transform: uppercase;
+      margin-bottom: 0.75rem;
+    }
+
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      color: var(--navy);
+      margin-bottom: 3.5rem;
+      line-height: 1.1;
+    }
+
+    .countdown-wrap {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      gap: clamp(1rem, 4vw, 3.5rem);
+      flex-wrap: wrap;
+    }
+
+    .countdown-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .countdown-box {
+      position: relative;
+      width: clamp(72px, 15vw, 110px);
+      height: clamp(72px, 15vw, 110px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .countdown-box svg.ring-svg {
+      position: absolute;
+      inset: 0;
+      width: 100%; height: 100%;
+      transform: rotate(-90deg);
+    }
+
+    .countdown-box svg.ring-svg circle {
+      fill: none;
+      stroke: var(--periwinkle);
+      stroke-width: 2;
+    }
+    .countdown-box svg.ring-svg .progress {
+      stroke: var(--gold);
+      stroke-linecap: round;
+      transition: stroke-dashoffset 0.9s ease;
+    }
+
+    .countdown-number {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      color: var(--navy);
+      line-height: 1;
+      position: relative;
+      z-index: 1;
+    }
+
+    .countdown-label {
+      font-size: 0.65rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-top: 0.6rem;
+    }
+
+    .countdown-sep {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.5rem, 4vw, 3rem);
+      color: var(--periwinkle);
+      align-self: center;
+      padding-bottom: 1.2rem;
+    }
+
+    /* ═══════════════════════════
+       PROGRAM — redesigned
+    ═══════════════════════════ */
+    .program-section {
+      padding: 6rem 2rem 7rem;
+      background: linear-gradient(170deg, #0D1B3E 0%, #0a1530 60%, #060e22 100%);
+      position: relative;
+      overflow: hidden;
+      z-index: 1;
+    }
+
+    /* subtle star dots via pseudo */
+    .program-section::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        radial-gradient(1px 1px at 15% 20%, rgba(255,255,255,0.25) 0%, transparent 100%),
+        radial-gradient(1px 1px at 45% 65%, rgba(255,255,255,0.2) 0%, transparent 100%),
+        radial-gradient(1px 1px at 72% 35%, rgba(201,168,76,0.3) 0%, transparent 100%),
+        radial-gradient(1px 1px at 85% 80%, rgba(255,255,255,0.2) 0%, transparent 100%),
+        radial-gradient(1px 1px at 30% 88%, rgba(201,168,76,0.2) 0%, transparent 100%);
+      pointer-events: none;
+    }
+
+    .program-section .section-eyebrow { color: var(--light-gold); }
+    .program-section .section-title   { color: var(--cream); }
+
+    /* Cards-based timeline */
+    .program-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.5rem;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .prog-card {
+      position: relative;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(201,168,76,0.2);
+      border-radius: 2px;
+      padding: 2rem 1.6rem 1.8rem;
+      cursor: pointer;
+      overflow: hidden;
+      transition: transform 0.35s ease, border-color 0.35s ease, background 0.35s ease;
+      outline: none;
+    }
+
+    .prog-card:hover,
+    .prog-card:focus {
+      transform: translateY(-6px);
+      border-color: var(--gold);
+      background: rgba(255,255,255,0.07);
+    }
+
+    /* Animated shimmer on hover */
+    .prog-card::after {
+      content: '';
+      position: absolute;
+      top: -60%; left: -60%;
+      width: 40%; height: 180%;
+      background: linear-gradient(105deg, transparent 30%, rgba(201,168,76,0.12) 50%, transparent 70%);
+      transform: skewX(-20deg);
+      transition: left 0.6s ease;
+      pointer-events: none;
+    }
+    .prog-card:hover::after { left: 160%; }
+
+    /* gold accent bar top */
+    .prog-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(to right, transparent, var(--gold), transparent);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .prog-card:hover::before,
+    .prog-card:focus::before { opacity: 1; }
+
+    .prog-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: rgba(201,168,76,0.12);
+      border: 1px solid rgba(201,168,76,0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.2rem;
+      font-size: 1.4rem;
+      transition: background 0.3s, transform 0.3s;
+    }
+    .prog-card:hover .prog-icon {
+      background: rgba(201,168,76,0.22);
+      transform: scale(1.1) rotate(-5deg);
+    }
+
+    .prog-time {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.8rem;
+      font-weight: 300;
+      color: var(--gold);
+      line-height: 1;
+      margin-bottom: 0.4rem;
+    }
+
+    .prog-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: var(--cream);
+      margin-bottom: 0.5rem;
+      line-height: 1.2;
+    }
+
+    .prog-desc {
+      font-size: 0.78rem;
+      color: rgba(197,212,240,0.6);
+      line-height: 1.7;
+      letter-spacing: 0.02em;
+    }
+
+    /* Progress connector line (desktop only) */
+    .prog-connector {
+      display: none;
+    }
+    @media (min-width: 800px) {
+      .prog-connector {
+        display: block;
+        grid-column: 1 / -1;
+        height: 1px;
+        margin: -0.75rem 2rem;
+        background: linear-gradient(to right,
+          transparent 0%,
+          rgba(201,168,76,0.4) 10%,
+          rgba(201,168,76,0.4) 90%,
+          transparent 100%
+        );
+        position: relative;
+      }
+    }
+
+    /* Expanded content with photo */
+    .prog-extra {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.5s ease;
+      opacity: 0;
+      margin-top: 1rem;
+      color: var(--light-gold);
+      line-height: 1.6;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .prog-card.expanded .prog-extra {
+      max-height: 420px;
+      opacity: 1;
+    }
+
+    .prog-photo {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      border-radius: 4px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+      border: 1px solid rgba(201,168,76,0.3);
+    }
+
+    .prog-extra-text {
+      font-size: 0.8rem;
+      letter-spacing: 0.02em;
+    }
+
+    /* ═══════════════════════════
+       LOCATIONS
+    ═══════════════════════════ */
+    .locations-section {
+      padding: 6rem 2rem;
+      background: var(--cream);
+      position: relative; z-index: 1;
+    }
+
+    .locations-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .location-card {
+      border: 1px solid rgba(26,58,107,0.15);
+      padding: 2.5rem 2rem;
+      position: relative;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      background: white;
+      overflow: hidden;
+    }
+
+    .location-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 3px; height: 100%;
+      background: linear-gradient(to bottom, var(--gold), var(--mid-blue));
+    }
+
+    .location-card::after {
+      content: '';
+      position: absolute;
+      bottom: -40px; right: -40px;
+      width: 120px; height: 120px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(26,58,107,0.05) 0%, transparent 70%);
+    }
+
+    .location-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 16px 48px rgba(13,27,62,0.12);
+    }
+
+    .location-number {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 3.5rem;
+      font-weight: 300;
+      color: var(--periwinkle);
+      line-height: 1;
+      margin-bottom: 0.4rem;
+    }
+
+    .location-type {
+      font-size: 0.68rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.8rem;
+    }
+
+    .location-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2rem;
+      font-weight: 600;
+      color: var(--navy);
+      margin-bottom: 0.5rem;
+      line-height: 1.1;
+    }
+
+    .location-address {
+      font-size: 0.85rem;
+      color: #888;
+      line-height: 1.7;
+      margin-bottom: 1.4rem;
+    }
+
+    .location-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--sapphire);
+      text-decoration: none;
+      border-bottom: 1px solid var(--periwinkle);
+      padding-bottom: 0.1rem;
+      transition: color 0.2s, border-color 0.2s;
+    }
+
+    .location-link:hover { color: var(--gold); border-color: var(--gold); }
+
+    /* ═══════════════════════════
+       RSVP
+    ═══════════════════════════ */
+    .rsvp-section {
+      padding: 7rem 2rem;
+      background: linear-gradient(140deg, var(--periwinkle) 0%, #d9e5f8 100%);
+      text-align: center;
+      position: relative; z-index: 1;
+    }
+
+    .rsvp-section .section-title { color: var(--navy); }
+
+    .rsvp-text {
+      max-width: 560px;
+      margin: 0 auto 2.5rem;
+      font-size: clamp(1.15rem, 2.6vw, 1.45rem); /* Увеличен размер */
+      font-family: 'Cormorant Garamond', serif;
+      line-height: 1.9;
+      color: #3a4a70;
+    }
+
+    .rsvp-btn {
+      display: inline-block;
+      padding: 1rem 3.2rem;
+      background: var(--navy);
+      color: var(--cream);
+      font-family: 'Lato', sans-serif;
+      font-size: 0.75rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      transition: background 0.3s ease, transform 0.2s ease;
+    }
+
+    .rsvp-btn::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, transparent, rgba(201,168,76,0.2), transparent);
+      transform: translateX(-100%);
+      transition: transform 0.5s ease;
+    }
+
+    .rsvp-btn:hover {
+      background: var(--sapphire);
+      transform: translateY(-2px);
+    }
+    .rsvp-btn:hover::after { transform: translateX(100%); }
+
+    /* ═══════════════════════════
+       FOOTER
+    ═══════════════════════════ */
+    .footer {
+      padding: 5rem 2rem;
+      background: var(--navy);
+      text-align: center;
+      position: relative; z-index: 1;
+    }
+
+    .footer-monogram {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: clamp(3rem, 8vw, 4.5rem);
+      color: var(--gold);
+      display: block;
+      margin-bottom: 0.4rem;
+      line-height: 1;
+      text-shadow: 0 0 24px rgba(201,168,76,0.3);
+    }
+
+    .footer-names {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: clamp(1.8rem, 5vw, 2.6rem);
+      color: var(--light-gold);
+      margin-bottom: 0.6rem;
+    }
+
+    .footer-date {
+      font-size: clamp(0.75rem, 1.5vw, 0.9rem);
+      letter-spacing: 0.35em;
+      color: rgba(197,212,240,0.5);
+      text-transform: uppercase;
+    }
+
+    /* ═══════════════════════════
+       REVEAL ON SCROLL
+    ═══════════════════════════ */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.75s ease, transform 0.75s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal-delay-4 { transition-delay: 0.4s; }
+
+    /* ═══════════════════════════
+       KEYFRAMES
+    ═══════════════════════════ */
+    @keyframes fadeDown {
+      from { opacity: 0; transform: translateY(-16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes bounceY {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50%       { transform: translateX(-50%) translateY(9px); }
+    }
+
+    @keyframes heartbeat {
+      0%, 100% { transform: scale(1); }
+      14%       { transform: scale(1.18); }
+      28%       { transform: scale(1); }
+      42%       { transform: scale(1.1); }
+      56%       { transform: scale(1); }
+    }
+
+    .hearts {
+      font-size: 2.8rem;
+      color: var(--gold);
+      display: block;
+      margin-bottom: 1rem;
+      animation: heartbeat 2.2s ease-in-out infinite;
+    }
+
+    /* ═══════════════════════════
+       RESPONSIVE
+    ═══════════════════════════ */
+    @media (max-width: 580px) {
+      .program-cards { grid-template-columns: 1fr 1fr; }
+      .prog-extra { max-height: 380px !important; }
+    }
+    @media (max-width: 380px) {
+      .program-cards { grid-template-columns: 1fr; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+    }
+  </style>
+</head>
+<body>
+
+<canvas id="bg-canvas"></canvas>
+<canvas id="petals-canvas"></canvas>
+<canvas id="rings-canvas"></canvas>
+
+<!-- ══════════════════════
+     HERO
+══════════════════════ -->
+<section class="hero">
+  <div class="hero-ring"></div>
+  <div class="hero-ring"></div>
+
+  <div class="hero-ornament">✦ &nbsp; Свадебное приглашение &nbsp; ✦</div>
+
+  <h1 class="hero-names">
+    <em>Айгель</em>
+    <span class="hero-ampersand">&amp;</span>
+    <em>Ян</em>
+  </h1>
+
+  <div class="hero-divider"><span>♦</span></div>
+
+  <div class="hero-date">11 июля 2026 года &nbsp;·&nbsp; Казань</div>
+  <p class="hero-subtitle">Мы приглашаем вас разделить с нами этот особенный день</p>
+
+  <div class="scroll-hint">
+    <span>прокрутите вниз</span>
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+      <path d="M12 5v14M5 12l7 7 7-7"/>
+    </svg>
+  </div>
+</section>
+
+<!-- ══════════════════════
+     COUNTDOWN
+══════════════════════ -->
+<section class="countdown-section">
+  <div class="section-eyebrow reveal">до свадьбы осталось</div>
+  <h2 class="section-title reveal">Считаем дни вместе</h2>
+
+  <div class="countdown-wrap reveal">
+    <div class="countdown-item">
+      <div class="countdown-box">
+        <svg class="ring-svg" viewBox="0 0 100 100">
+          <circle cx="50" cy="50" r="46"/>
+          <circle class="progress" id="ring-days" cx="50" cy="50" r="46"
+            stroke-dasharray="289" stroke-dashoffset="0"/>
+        </svg>
+        <span class="countdown-number" id="cd-days">--</span>
+      </div>
+      <span class="countdown-label">дней</span>
+    </div>
+
+    <div class="countdown-sep">·</div>
+
+    <div class="countdown-item">
+      <div class="countdown-box">
+        <svg class="ring-svg" viewBox="0 0 100 100">
+          <circle cx="50" cy="50" r="46"/>
+          <circle class="progress" id="ring-hours" cx="50" cy="50" r="46"
+            stroke-dasharray="289" stroke-dashoffset="0"/>
+        </svg>
+        <span class="countdown-number" id="cd-hours">--</span>
+      </div>
+      <span class="countdown-label">часов</span>
+    </div>
+
+    <div class="countdown-sep">·</div>
+
+    <div class="countdown-item">
+      <div class="countdown-box">
+        <svg class="ring-svg" viewBox="0 0 100 100">
+          <circle cx="50" cy="50" r="46"/>
+          <circle class="progress" id="ring-minutes" cx="50" cy="50" r="46"
+            stroke-dasharray="289" stroke-dashoffset="0"/>
+        </svg>
+        <span class="countdown-number" id="cd-minutes">--</span>
+      </div>
+      <span class="countdown-label">минут</span>
+    </div>
+
+    <div class="countdown-sep">·</div>
+
+    <div class="countdown-item">
+      <div class="countdown-box">
+        <svg class="ring-svg" viewBox="0 0 100 100">
+          <circle cx="50" cy="50" r="46"/>
+          <circle class="progress" id="ring-seconds" cx="50" cy="50" r="46"
+            stroke-dasharray="289" stroke-dashoffset="0"/>
+        </svg>
+        <span class="countdown-number" id="cd-seconds">--</span>
+      </div>
+      <span class="countdown-label">секунд</span>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════
+     PROGRAM
+══════════════════════ -->
+<section class="program-section">
+  <div class="section-eyebrow reveal" style="text-align:center;">расписание дня</div>
+  <h2 class="section-title reveal" style="text-align:center; margin-bottom:3.5rem;">Программа торжества</h2>
+  <p style="text-align:center; color:rgba(197,212,240,0.45); font-size:0.9rem; letter-spacing:0.18em; margin-bottom:2.5rem;" class="reveal">Нажмите на карточку, чтобы узнать подробнее</p>
+
+  <div class="program-cards" role="list">
+
+    <div class="prog-card reveal reveal-delay-1" role="listitem" tabindex="0"
+         data-extra="г. Казань, ул. Бондаренко, 34"
+         data-photo="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRCIqiNqjNUB3_v268ZKG2ir8zcskoORmhtDk2Mwy3fXw&s=10">
+      <div class="prog-icon">💍</div>
+      <div class="prog-time">13:20</div>
+      <div class="prog-title">Церемония бракосочетания</div>
+      <div class="prog-desc">Торжественная регистрация<br/>ЗАГС «Чаша»</div>
+      <div class="prog-extra">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRCIqiNqjNUB3_v268ZKG2ir8zcskoORmhtDk2Mwy3fXw&s=10" alt="Церемония" class="prog-photo">
+        <div class="prog-extra-text"></div>
+      </div>
+    </div>
+
+    <div class="prog-card reveal reveal-delay-2" role="listitem" tabindex="0"
+         data-extra="Ресторан «Чинаякъ», ул. Чернышевского, 29А"
+         data-photo="https://yandex-images.clstorage.net/QFJX98399/dbc69catnvHs/VuIrwnm7OQHFzvlKtRXJUM-vNa1CKWOYie2wp5fR03dDulKa9s5L-BPg3F_-r7n7t1UO0hvQSXZTZzoSaU7wqXI27_YoHuxV1HptisWFiKR-e7WpM-xDKfhd9QPHZGO3BuyhPXHMWBr15y5NWTss-mNBKCGP4j9wweCvgWt9oO1Gk6lwP_qbIuB8ybtmxXiETm1GSyIf0Ro_HVTBsVbWcJNMYZ3T_Pi69dSu7FvKHX2zcltRWxK-YUOyTUNqTYDcNcIqs_95WxBj73oohZeLta-PtZsg7lCLzw91o2P3xlBRPcGeEFxquPRFDIzbOxyscyM7YtqwnuJDg9xRWv-yD-eAyHN8O9sz8LxpSGY1GkdeHQQosH7DWm7tlUCD1wawYf-ATeB--XqWRR1uu0nu3pNyOrArcX4T89NOIKhMwJ6n01vDf5jbItM-CFoHF6gkfc3ka3Eeo3o8X2TwMbYmQTJ_IW_C_diKtmTcj5rrrd7CglhT2REcQVMBfeIrv7K-NsIa839o6OOSravaN2V4Jh_OxZvSTGE7nH91I2JG9HLQnHKc8y4JyuYGPL246R_OUxC7Yyvx3ELg4h4xC75i_jbSqILfa3uAQ22bKAcXicTuD6Q7UZ7SOD-9JRBzlScw8IxiTYOOOpon1w8fS5k-DHMhCWJKss5zsgDvwyucka11gOrTDZvacmOdKmq21LvXvG21avA_gSgvnQRDQfSWIjGscj7B7Gpo1_fez2i4_-3wE0thanKvcFIhHHM5HBPM1-B40R5Ja_LCTxtp9ffbVz4_1cvBrENLzR1Ho8AEVuNzj8J8AoxLe4a17q2LuS3cUpKo8GvBfFMjkd8DWm_i3JTBKiDf6VsCEE9LOKX3eLU_reVpkb-yClzMlMJSF7RTQW5QbREcu7r1tY7d-0nvzgLimsJaQE1xEdBsMolPQD43Isqx3Cm5YHFeWWvXZPpE7Z30-5H8wSq9bscAI">
+      <div class="prog-icon">🥂</div>
+      <div class="prog-time">15:40</div>
+      <div class="prog-title">Сбор гостей</div>
+      <div class="prog-desc">Местоположение:<br/>Ресторан «Чинаякъ»</div>
+      <div class="prog-extra">
+        <img src="https://yandex-images.clstorage.net/QFJX98399/dbc69catnvHs/VuIrwnm7OQHFzvlKtRXJUM-vNa1CKWOYie2wp5fR03dDulKa9s5L-BPg3F_-r7n7t1UO0hvQSXZTZzoSaU7wqXI27_YoHuxV1HptisWFiKR-e7WpM-xDKfhd9QPHZGO3BuyhPXHMWBr15y5NWTss-mNBKCGP4j9wweCvgWt9oO1Gk6lwP_qbIuB8ybtmxXiETm1GSyIf0Ro_HVTBsVbWcJNMYZ3T_Pi69dSu7FvKHX2zcltRWxK-YUOyTUNqTYDcNcIqs_95WxBj73oohZeLta-PtZsg7lCLzw91o2P3xlBRPcGeEFxquPRFDIzbOxyscyM7YtqwnuJDg9xRWv-yD-eAyHN8O9sz8LxpSGY1GkdeHQQosH7DWm7tlUCD1wawYf-ATeB--XqWRR1uu0nu3pNyOrArcX4T89NOIKhMwJ6n01vDf5jbItM-CFoHF6gkfc3ka3Eeo3o8X2TwMbYmQTJ_IW_C_diKtmTcj5rrrd7CglhT2REcQVMBfeIrv7K-NsIa839o6OOSravaN2V4Jh_OxZvSTGE7nH91I2JG9HLQnHKc8y4JyuYGPL246R_OUxC7Yyvx3ELg4h4xC75i_jbSqILfa3uAQ22bKAcXicTuD6Q7UZ7SOD-9JRBzlScw8IxiTYOOOpon1w8fS5k-DHMhCWJKss5zsgDvwyucka11gOrTDZvacmOdKmq21LvXvG21avA_gSgvnQRDQfSWIjGscj7B7Gpo1_fez2i4_-3wE0thanKvcFIhHHM5HBPM1-B40R5Ja_LCTxtp9ffbVz4_1cvBrENLzR1Ho8AEVuNzj8J8AoxLe4a17q2LuS3cUpKo8GvBfFMjkd8DWm_i3JTBKiDf6VsCEE9LOKX3eLU_reVpkb-yClzMlMJSF7RTQW5QbREcu7r1tY7d-0nvzgLimsJaQE1xEdBsMolPQD43Isqx3Cm5YHFeWWvXZPpE7Z30-5H8wSq9bscAI" alt="Сбор гостей" class="prog-photo">
+        <div class="prog-extra-text"></div>
+      </div>
+    </div>
+
+    <div class="prog-card reveal reveal-delay-3" role="listitem" tabindex="0"
+         data-extra="Торжественный ужин, живые поздравления, музыкальная программа и танцы"
+         data-photo="https://static.tildacdn.com/tild3734-3863-4634-a661-363663303936/IMG_1084.JPG">
+      <div class="prog-icon">🍽️</div>
+      <div class="prog-time">16:00</div>
+      <div class="prog-title">Праздничный банкет</div>
+      <div class="prog-desc">Ужин и поздравления<br/>Вечер воспоминаний</div>
+      <div class="prog-extra">
+        <img src="https://static.tildacdn.com/tild3734-3863-4634-a661-363663303936/IMG_1084.JPG" alt="Банкет" class="prog-photo">
+        <div class="prog-extra-text"></div>
+      </div>
+    </div>
+
+    <div class="prog-card reveal reveal-delay-4" role="listitem" tabindex="0"
+         data-extra="Финальный тост, благодарности и красивое завершение вечера"
+         data-photo="C:\Users\Ян\Desktop\wedding\ab23879f-8793-4452-bb33-09142ac8b43e.png">
+      <div class="prog-icon">🌙</div>
+      <div class="prog-time">21:00</div>
+      <div class="prog-title">Завершение вечера</div>
+      <div class="prog-desc">Финальный тост<br/>Ресторан «Чинаякъ»</div>
+      <div class="prog-extra">
+        <img src="C:\Users\Ян\Desktop\wedding\ab23879f-8793-4452-bb33-09142ac8b43e.png" alt="Завершение" class="prog-photo">
+        <div class="prog-extra-text"></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══════════════════════
+     LOCATIONS
+══════════════════════ -->
+<section class="locations-section">
+  <div class="section-eyebrow reveal" style="text-align:center;">адреса</div>
+  <h2 class="section-title reveal" style="text-align:center; margin-bottom:3rem;">Где нас найти</h2>
+
+  <div class="locations-grid">
+    <div class="location-card reveal">
+      <div class="location-number">01</div>
+      <div class="location-type">Торжественная регистрация</div>
+      <div class="location-name">ЗАГС «Чаша»</div>
+      <div class="location-address">г. Казань<br/>ул. Бондаренко, 34</div>
+      <a class="location-link" href="https://yandex.ru/maps/?text=Казань+ул+Бондаренко+34+ЗАГС+Чаша" target="_blank" rel="noopener">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/>
+          <circle cx="12" cy="10" r="3"/>
+        </svg>
+        Открыть на карте
+      </a>
+    </div>
+
+    <div class="location-card reveal">
+      <div class="location-number">02</div>
+      <div class="location-type">Праздничный банкет</div>
+      <div class="location-name">«Чинаякъ»</div>
+      <div class="location-address">г. Казань<br/>ул. Чернышевского, 29А</div>
+      <a class="location-link" href="https://yandex.ru/maps/?text=Казань+ул+Чернышевского+29А+ресторан+Чинаякъ" target="_blank" rel="noopener">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/>
+          <circle cx="12" cy="10" r="3"/>
+        </svg>
+        Открыть на карте
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════
+     RSVP
+══════════════════════ -->
+<section class="rsvp-section">
+  <div class="section-eyebrow reveal">подтверждение</div>
+  <h2 class="section-title reveal">Вы придёте?</h2>
+  <p class="rsvp-text reveal">
+    Пожалуйста, подтвердите своё присутствие до&nbsp;<strong>5 июля 2026</strong>.
+    Это поможет нам учесть всё до мельчайших деталей и сделать этот день по-настоящему незабываемым.
+  </p>
+  <a class="rsvp-btn reveal" href="https://max.ru/u/f9LHodD0cOLvpsBXKyUsx23dKJkrcCFWmN2K71qvf1eqzKQYPksLWExDyIE">Написать и подтвердить</a>
+</section>
+
+<!-- ══════════════════════
+     FOOTER
+══════════════════════ -->
+<footer class="footer">
+  <span class="hearts">♥</span>
+  <div class="footer-names">Айгель &amp; Ян</div>
+  <div class="footer-date">11 · 07 · 2026 · Казань</div>
+</footer>
+
+<script>
+/* ════════════════════════════════════════
+   1. STARFIELD / FIREFLIES (bg-canvas)
+════════════════════════════════════════ */
+(function() {
+  const c = document.getElementById('bg-canvas');
+  const ctx = c.getContext('2d');
+  let W, H, stars = [];
+
+  function resize() {
+    W = c.width = window.innerWidth;
+    H = c.height = window.innerHeight;
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  function mkStar() {
+    return {
+      x: Math.random() * W,
+      y: Math.random() * H,
+      r: 0.4 + Math.random() * 1.2,
+      alpha: Math.random(),
+      dAlpha: (Math.random() * 0.008 + 0.002) * (Math.random() < 0.5 ? 1 : -1),
+      gold: Math.random() < 0.15,
+    };
+  }
+
+  for (let i = 0; i < 160; i++) stars.push(mkStar());
+
+  function loop() {
+    ctx.clearRect(0, 0, W, H);
+    for (const s of stars) {
+      s.alpha += s.dAlpha;
+      if (s.alpha <= 0 || s.alpha >= 1) s.dAlpha *= -1;
+      ctx.globalAlpha = Math.max(0, Math.min(1, s.alpha)) * 0.7;
+      ctx.beginPath();
+      ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+      ctx.fillStyle = s.gold ? '#C9A84C' : '#ffffff';
+      ctx.fill();
+    }
+    ctx.globalAlpha = 1;
+    requestAnimationFrame(loop);
+  }
+  loop();
+})();
+
+/* ════════════════════════════════════════
+   2. FALLING PETALS (petals-canvas)
+════════════════════════════════════════ */
+(function() {
+  const canvas = document.getElementById('petals-canvas');
+  const ctx = canvas.getContext('2d');
+  let petals = [], W, H, running = true;
+
+  function resize() { W = canvas.width = window.innerWidth; H = canvas.height = window.innerHeight; }
+  resize();
+  window.addEventListener('resize', resize);
+
+  const colors = ['#C5D4F0','#8A9BBD','#C9A84C','#d6e4f8','#E8D5A3'];
+
+  function mkPetal() {
+    return {
+      x: Math.random() * W, y: -20,
+      r: 5 + Math.random() * 9,
+      color: colors[Math.floor(Math.random() * colors.length)],
+      speed: 0.7 + Math.random() * 1.3,
+      drift: (Math.random() - 0.5) * 1.1,
+      spin: (Math.random() - 0.5) * 0.07,
+      angle: Math.random() * Math.PI * 2,
+      opacity: 0.4 + Math.random() * 0.5,
+    };
+  }
+
+  let spawned = 0;
+  const max = 60;
+  const si = setInterval(() => {
+    for (let i = 0; i < 3; i++) { if (petals.length < max) { petals.push(mkPetal()); spawned++; } }
+    if (spawned >= max) clearInterval(si);
+  }, 100);
+
+  function drawPetal(p) {
+    ctx.save();
+    ctx.globalAlpha = p.opacity;
+    ctx.translate(p.x, p.y);
+    ctx.rotate(p.angle);
+    ctx.beginPath();
+    ctx.moveTo(0, -p.r);
+    ctx.bezierCurveTo(p.r * 0.8, -p.r * 0.5, p.r * 0.8, p.r * 0.5, 0, p.r);
+    ctx.bezierCurveTo(-p.r * 0.8, p.r * 0.5, -p.r * 0.8, -p.r * 0.5, 0, -p.r);
+    ctx.fillStyle = p.color;
+    ctx.fill();
+    ctx.restore();
+  }
+
+  function loop() {
+    if (!running) return;
+    ctx.clearRect(0, 0, W, H);
+    for (let i = petals.length - 1; i >= 0; i--) {
+      const p = petals[i];
+      p.y += p.speed; p.x += p.drift; p.angle += p.spin;
+      drawPetal(p);
+      if (p.y > H + 30) { Object.assign(p, mkPetal()); p.y = -20; }
+    }
+    requestAnimationFrame(loop);
+  }
+  loop();
+
+  setTimeout(() => { running = false; petals = []; ctx.clearRect(0, 0, W, H); }, 14000);
+})();
+
+/* ════════════════════════════════════════
+   3. COUNTDOWN with SVG ring progress
+════════════════════════════════════════ */
+(function() {
+  const target = new Date('2026-07-11T13:20:00+03:00').getTime();
+  const CIRC = 289;
+
+  function setRing(id, frac) {
+    const el = document.getElementById(id);
+    if (el) el.style.strokeDashoffset = CIRC * (1 - frac);
+  }
+
+  function pad(n) { return String(n).padStart(2, '0'); }
+
+  function tick() {
+    const diff = Math.max(0, target - Date.now());
+    const d = Math.floor(diff / 86400000);
+    const h = Math.floor((diff % 86400000) / 3600000);
+    const m = Math.floor((diff % 3600000) / 60000);
+    const s = Math.floor((diff % 60000) / 1000);
+
+    document.getElementById('cd-days').textContent = d;
+    document.getElementById('cd-hours').textContent = pad(h);
+    document.getElementById('cd-minutes').textContent = pad(m);
+    document.getElementById('cd-seconds').textContent = pad(s);
+
+    setRing('ring-days',    d / 365);
+    setRing('ring-hours',   h / 24);
+    setRing('ring-minutes', m / 60);
+    setRing('ring-seconds', s / 60);
+  }
+  tick();
+  setInterval(tick, 1000);
+})();
+
+/* ════════════════════════════════════════
+   4. PROGRAM CARDS — click to expand with photo
+════════════════════════════════════════ */
+(function() {
+  const cards = document.querySelectorAll('.prog-card');
+  let currentlyExpanded = null;
+
+  cards.forEach(card => {
+    const extra = card.querySelector('.prog-extra');
+    const extraText = extra.querySelector('.prog-extra-text');
+    const photo = extra.querySelector('img');
+    
+    const text = card.dataset.extra || '';
+    extraText.textContent = text;
+
+    // Ensure photo src is set
+    if (photo && card.dataset.photo) {
+      photo.src = card.dataset.photo;
+    }
+
+    function toggle() {
+      const isExpanded = card.classList.contains('expanded');
+
+      // Close previous if any
+      if (currentlyExpanded && currentlyExpanded !== card) {
+        currentlyExpanded.classList.remove('expanded');
+      }
+
+      if (isExpanded) {
+        card.classList.remove('expanded');
+        currentlyExpanded = null;
+      } else {
+        card.classList.add('expanded');
+        currentlyExpanded = card;
+      }
+    }
+
+    card.addEventListener('click', toggle);
+    card.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') { 
+        e.preventDefault(); 
+        toggle(); 
+      }
+    });
+  });
+})();
+
+/* ════════════════════════════════════════
+   5. SCROLL REVEAL
+════════════════════════════════════════ */
+(function() {
+  const els = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
+    });
+  }, { threshold: 0.12 });
+  els.forEach(el => io.observe(el));
+})();
+
+/* ════════════════════════════════════════
+   7. WEDDING RINGS
+════════════════════════════════════════ */
+(function() {
+  const canvas = document.getElementById('rings-canvas');
+  const ctx = canvas.getContext('2d');
+  let W, H;
+
+  function resize() {
+    W = canvas.width = window.innerWidth;
+    H = canvas.height = window.innerHeight;
+  }
+  resize();
+  window.addEventListener('resize', () => { resize(); placeRings(); });
+
+  let rings = [];
+
+  function placeRings() {
+    rings = [];
+    const positions = [
+      { fx: 0.08, fy: 0.04 }, { fx: 0.88, fy: 0.06 }, { fx: 0.5, fy: 0.09 },
+      { fx: 0.15, fy: 0.18 }, { fx: 0.82, fy: 0.20 },
+      { fx: 0.06, fy: 0.32 }, { fx: 0.92, fy: 0.35 }, { fx: 0.45, fy: 0.30 }, { fx: 0.70, fy: 0.40 },
+      { fx: 0.12, fy: 0.52 }, { fx: 0.85, fy: 0.55 }, { fx: 0.50, fy: 0.50 },
+      { fx: 0.20, fy: 0.68 }, { fx: 0.75, fy: 0.70 }, { fx: 0.50, fy: 0.65 },
+      { fx: 0.10, fy: 0.86 }, { fx: 0.90, fy: 0.88 }, { fx: 0.35, fy: 0.83 }, { fx: 0.65, fy: 0.90 },
+      { fx: 0.30, fy: 0.45 }, { fx: 0.60, fy: 0.22 }, { fx: 0.78, fy: 0.60 },
+    ];
+
+    positions.forEach((p) => {
+      const bigR  = 22 + Math.random() * 22;
+      const smallR = bigR * (0.78 + Math.random() * 0.10);
+      const onDark = (p.fy < 0.12) || (p.fy > 0.27 && p.fy < 0.47) || (p.fy > 0.81);
+      rings.push({
+        fx: p.fx, fy: p.fy,
+        bigR, smallR,
+        driftX: (Math.random() - 0.5) * 0.00007,
+        driftY: (Math.random() - 0.5) * 0.00005,
+        phase:       Math.random() * Math.PI * 2,
+        shimmerSpeed: 0.5 + Math.random() * 0.9,
+        sparkPhase:  Math.random() * Math.PI * 2,
+        sparkSpeed:  0.25 + Math.random() * 0.4,
+        onDark,
+        rotation: (Math.random() - 0.5) * 0.6,
+      });
+    });
+  }
+  placeRings();
+
+  let t = 0;
+
+  function drawLinkedRings(cx, cy, bigR, smallR, alpha, shimmer, sparkle, rotation, onDark) {
+    const gap  = bigR + smallR - smallR * 1.35;
+    const bx = -gap * 0.42,  by = -gap * 0.18;
+    const sx =  gap * 0.58,  sy =  gap * 0.22;
+
+    const bLW = Math.max(1.2, bigR * 0.11);
+    const sLW = Math.max(1.0, smallR * 0.13);
+
+    const goldA     = onDark ? alpha        : alpha * 0.5;
+    const goldBase  = `rgba(201,168,76,${goldA})`;
+    const goldLight = `rgba(232,205,140,${goldA})`;
+    const goldShim  = `rgba(255,245,200,${shimmer * goldA * 1.1})`;
+    const navyBase  = goldLight;
+    const navyShim  = goldShim;
+
+    const dx = sx - bx, dy = sy - by;
+    const d  = Math.sqrt(dx*dx + dy*dy);
+
+    if (d >= bigR + smallR || d <= Math.abs(bigR - smallR)) {
+      ctx.save();
+      ctx.translate(cx, cy);
+      ctx.rotate(rotation);
+      ctx.globalAlpha = alpha;
+      ctx.beginPath(); ctx.arc(bx, by, bigR,   0, Math.PI*2); ctx.strokeStyle = goldBase;  ctx.lineWidth = bLW; ctx.stroke();
+      ctx.beginPath(); ctx.arc(sx, sy, smallR, 0, Math.PI*2); ctx.strokeStyle = goldLight; ctx.lineWidth = sLW; ctx.stroke();
+      ctx.restore();
+      return;
+    }
+
+    const a = (bigR*bigR - smallR*smallR + d*d) / (2*d);
+    const h = Math.sqrt(Math.max(0, bigR*bigR - a*a));
+    const midX = bx + a*dx/d, midY = by + a*dy/d;
+    const ix1 = midX + h*dy/d,  iy1 = midY - h*dx/d;
+    const ix2 = midX - h*dy/d,  iy2 = midY + h*dx/d;
+
+    const bAngle1 = Math.atan2(iy1 - by, ix1 - bx);
+    const bAngle2 = Math.atan2(iy2 - by, ix2 - bx);
+    const sAngle1 = Math.atan2(iy1 - sy, ix1 - sx);
+    const sAngle2 = Math.atan2(iy2 - sy, ix2 - sx);
+
+    ctx.save();
+    ctx.translate(cx, cy);
+    ctx.rotate(rotation);
+
+    // PASS 1: big ring BACK
+    ctx.save();
+    ctx.beginPath();
+    ctx.arc(bx, by, bigR, bAngle1, bAngle2, false);
+    ctx.strokeStyle = goldBase;
+    ctx.lineWidth = bLW;
+    ctx.stroke();
+    ctx.restore();
+
+    // PASS 2: small ring FULL
+    ctx.save();
+    ctx.beginPath();
+    ctx.arc(sx, sy, smallR, 0, Math.PI*2);
+    ctx.strokeStyle = navyBase;
+    ctx.lineWidth = sLW;
+    ctx.stroke();
+    if (shimmer > 0.05) {
+      ctx.beginPath();
+      ctx.arc(sx, sy, smallR, sAngle2 + Math.PI*0.3, sAngle2 + Math.PI*1.1);
+      ctx.strokeStyle = navyShim;
+      ctx.lineWidth = sLW * 1.5;
+      ctx.stroke();
+    }
+    ctx.restore();
+
+    // PASS 3: big ring FRONT
+    ctx.save();
+    ctx.beginPath();
+    ctx.arc(bx, by, bigR, bAngle2, bAngle1, false);
+    ctx.strokeStyle = goldBase;
+    ctx.lineWidth = bLW;
+    ctx.stroke();
+    if (shimmer > 0.05) {
+      const midAng = (bAngle2 + bAngle1) / 2 + Math.PI;
+      ctx.beginPath();
+      ctx.arc(bx, by, bigR, midAng - 0.7, midAng + 0.7);
+      ctx.strokeStyle = goldShim;
+      ctx.lineWidth = bLW * 1.6;
+      ctx.stroke();
+    }
+    ctx.restore();
+
+    // Sparkles
+    if (sparkle > 0) {
+      const spA = sparkle * alpha;
+      const sparkCol = onDark ? `rgba(255,248,210,${spA})` : `rgba(180,215,255,${spA})`;
+
+      [[ix1, iy1], [ix2, iy2]].forEach(([px, py]) => {
+        ctx.beginPath();
+        ctx.arc(px, py, bLW * 1.1 * sparkle, 0, Math.PI*2);
+        ctx.fillStyle = sparkCol;
+        ctx.fill();
+
+        const ray = bigR * 0.22 * sparkle;
+        ctx.strokeStyle = sparkCol;
+        ctx.lineWidth = bLW * 0.35;
+        [[1,0],[0,1],[0.7,0.7],[-0.7,0.7]].forEach(([rx,ry]) => {
+          ctx.beginPath();
+          ctx.moveTo(px - rx*ray, py - ry*ray);
+          ctx.lineTo(px + rx*ray, py + ry*ray);
+          ctx.stroke();
+        });
+      });
+    }
+
+    ctx.restore();
+  }
+
+  function loop() {
+    ctx.clearRect(0, 0, W, H);
+
+    const docH = Math.max(document.body.scrollHeight, document.documentElement.scrollHeight, H);
+    const scrollY = window.scrollY || 0;
+    t += 0.012;
+
+    rings.forEach(ring => {
+      const absY = ring.fy * docH;
+      const vy   = absY - scrollY;
+      const maxR = ring.bigR;
+      if (vy < -maxR * 5 || vy > H + maxR * 5) return;
+
+      const vx = ring.fx * W;
+      ring.fx = Math.max(0.04, Math.min(0.96, ring.fx + ring.driftX));
+      ring.fy = Math.max(0.02, Math.min(0.98, ring.fy + ring.driftY));
+
+      const shimmer   = (Math.sin(t * ring.shimmerSpeed + ring.phase) + 1) / 2;
+      const sparkRaw  = Math.sin(t * ring.sparkSpeed + ring.sparkPhase);
+      const sparkle   = sparkRaw > 0.80 ? (sparkRaw - 0.80) / 0.20 : 0;
+      const baseAlpha = 0.16 + shimmer * 0.24;
+
+      drawLinkedRings(vx, vy, ring.bigR, ring.smallR, baseAlpha, shimmer * 0.75, sparkle, ring.rotation, ring.onDark);
+    });
+
+    requestAnimationFrame(loop);
+  }
+
+  window.addEventListener('scroll', () => {}, { passive: true });
+  loop();
+})();
+</script>
+</body>
+</html>
